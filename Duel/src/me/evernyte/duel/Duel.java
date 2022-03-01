@@ -10,6 +10,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.enchantments.*;
@@ -38,6 +39,7 @@ public class Duel implements CommandExecutor {
 	public HashMap<String, Integer> tokens = new HashMap<String, Integer>(); //Edit for pramsing : this is probably going to need to be changed
 	ArrayList<String> disabled = new ArrayList<String>(); //For people who disabled dueling
 	ArrayList<String> mistake = new ArrayList<String>(); //Prevents people from having 30 seconds CD if they mess their cmd up
+	ArrayList<PlayerDS> playerData = new ArrayList<>();
 	
 	//For setting up the place for the winner to be teleported on win
 	Location spawn = Bukkit.getWorld("world").getSpawnLocation();
@@ -47,6 +49,10 @@ public class Duel implements CommandExecutor {
 	Location arena = fight.add(-5, 5, -5);
 	//Used in main to teleport players back to spawn
 	
+	private void onPlayerJoin(PlayerJoinEvent e) {
+		if(!e.getPlayer().hasPlayedBefore())
+			playerData.add(new PlayerDS(e.getPlayer().getUniqueId()));
+	}
 	
 	public void healPlayers(Player player1, Player player2) {
 		player1.setHealth(20.0);
