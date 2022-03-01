@@ -1,0 +1,13 @@
+name: DuelTemp
+version: 1.0
+author: Evernyte
+main: me.evernyte.duel.main
+description: enjoy
+
+commands:
+  duel:
+   aliases: [duel]
+  bruh:
+   aliases: [bruh]
+  token:
+   aliases: [token]
